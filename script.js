@@ -11,7 +11,18 @@ function renderTarefas(){
         let liElement = document.createElement("li");
         let tarefaText = document.createTextNode(tarefa);
 
+        let linkElement = document.createElement("a");
+        linkElement.setAttribute("href", "#");
+
+        let linkText = document.createTextNode("Excluir tarefa");
+        linkElement.appendChild(linkText)
+
+        let posicao = tarefas.indexOf(tarefa);
+
+        linkElement.setAttribute("onclick", `deletarTarefas(${posicao})`);
+
         liElement.appendChild(tarefaText);
+        liElement.appendChild(linkElement);
         listElement.appendChild(liElement);
 
     });
@@ -33,3 +44,9 @@ function adicionarTarefas(){
 };
 
 buttonElement.onclick = adicionarTarefas;
+
+function deletarTarefas(posicao){
+    tarefas.splice(posicao, 1);
+
+    renderTarefas();
+};
